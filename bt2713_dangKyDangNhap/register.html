@@ -18,7 +18,7 @@
   <body ng-controller="myCtrl">
     <div class="container mt-3">
       <h2>Register</h2>
-      <form>
+      <form ng-submit="MyForm.$valid" novalidate>
         <div class="mb3 mt-3">
           <label for="">Fullname</label>
           <input
@@ -59,8 +59,8 @@
             name="pwd"
           />
         </div>
-        <button type="submit" class="btn btn-primary" ng-click="addAccount()">Register</button>
-        <button type="reset" class="btn btn-warning">Clear</button>
+        <button type="submit" class="btn btn-primary" ng-click="addAccount()" ng-disabled="MyForm.$invalid">Register</button>
+        <button type="reset" class="btn btn-warning" ng-click="reset()">Clear</button>
       </form>
     </div>
   </body>
@@ -78,6 +78,16 @@
             $scope.accList.push($scope.acc);
             localStorage.setItem('accList', JSON.stringify($scope.accList));
             alert('Register success');
+          $scope.fullname = '';
+                $scope.age = '';
+                $scope.email = '';
+                $scope.pwd = '';
+        }
+      $scope.reset = function() {
+            $scope.fullname = '';
+            $scope.age = '';
+            $scope.email = '';
+            $scope.pwd = '';
         }
     })
   </script>
